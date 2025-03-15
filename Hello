@@ -805,12 +805,12 @@ createButton("Chaos (Theme if want destroy only!)", function()
     local sky = coroutine.create(function()
         while true do
             local s = Instance.new("Sky", game.Lighting)
-            s.SkyboxBk = "rbxassetid://76475885160035"
-            s.SkyboxDn = "rbxassetid://76475885160035"
-            s.SkyboxFt = "rbxassetid://76475885160035"
-            s.SkyboxLf = "rbxassetid://76475885160035"
-            s.SkyboxRt = "rbxassetid://76475885160035"
-            s.SkyboxUp = "rbxassetid://76475885160035"
+            s.SkyboxBk = "rbxassetid://201208408"
+            s.SkyboxDn = "rbxassetid://201208408"
+            s.SkyboxFt = "rbxassetid://201208408"
+            s.SkyboxLf = "rbxassetid://201208408"
+            s.SkyboxRt = "rbxassetid://201208408"
+            s.SkyboxUp = "rbxassetid://201208408"
             s.CelestialBodiesShown = false
             task.wait(0.3)
         end
