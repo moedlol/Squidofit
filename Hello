@@ -862,6 +862,7 @@ createButton("Chaos (Theme if want destroy only!)", function()
     end)
     coroutine.resume(msgCoroutine)
 
+    -- Faster rain effect
     local rain = coroutine.create(function()
         local noises = {
             'rbxassetid://230287740', 
@@ -888,7 +889,8 @@ createButton("Chaos (Theme if want destroy only!)", function()
             mesh.MeshId = "rbxassetid://7234998844"
             mesh.TextureId = "rbxassetid://1009824086"
 
-            task.delay(5, function()
+            -- Faster removal of parts
+            task.delay(3, function()
                 if part then
                     part:Destroy()
                 end
@@ -898,16 +900,16 @@ createButton("Chaos (Theme if want destroy only!)", function()
                 sound:Destroy()
             end)
 
-            task.wait(0.1)
+            task.wait(0.05) -- Faster spawning
         end
     end)
     coroutine.resume(rain)
 
     local sound = Instance.new("Sound")
     sound.Name = "Sound"
-    sound.SoundId = "rbxassetid://97797838120232"  -- Updated SoundId
+    sound.SoundId = "rbxassetid://97797838120232"
     sound.Volume = 10
-    sound.Pitch = 0.2  -- Pitch set to 0.2
+    sound.Pitch = 0.2
     sound.Looped = true
     sound.Archivable = false
     sound.Parent = game.Workspace
