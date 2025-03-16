@@ -801,124 +801,104 @@ createButton("Chaos (Theme if want destroy only!)", function()
         end
     end)
 
-    createButton("Chaos TOAD", function()
+createButton("Toadroast", function()
+    wait(0)
+    math.randomseed(tick() % 1 * 1e6)
+    
     local sky = coroutine.create(function()
-        while true do
+        while wait(0.3) do
             local s = Instance.new("Sky", game.Lighting)
-            s.SkyboxBk = "rbxassetid://76475885160035"
-            s.SkyboxDn = "rbxassetid://76475885160035"
-            s.SkyboxFt = "rbxassetid://76475885160035"
-            s.SkyboxLf = "rbxassetid://76475885160035"
-            s.SkyboxRt = "rbxassetid://76475885160035"
-            s.SkyboxUp = "rbxassetid://76475885160035"
+            s.SkyboxBk, s.SkyboxDn, s.SkyboxFt, s.SkyboxLf, s.SkyboxRt, s.SkyboxUp = 
+                "rbxassetid://201208408", "rbxassetid://201208408", "rbxassetid://201208408", 
+                "rbxassetid://201208408", "rbxassetid://201208408", "rbxassetid://201208408"
             s.CelestialBodiesShown = false
-            task.wait(0.3)
         end
     end)
-    coroutine.resume(sky)
 
     local del = coroutine.create(function()
-        while true do
+        while wait(0.3) do
             for _, v in pairs(workspace:GetChildren()) do
                 if v:IsA("Model") then
                     v:Destroy()
                 end
             end
-            task.wait(0.3)
         end
     end)
-    coroutine.resume(del)
+
+    local noises = {'rbxassetid://230287740', 'rbxassetid://271787597', 'rbxassetid://153752123', 'rbxassetid://271787503'}
 
     local sound = coroutine.create(function()
         local a = Instance.new("Sound", workspace)
-        a.SoundId = "rbxassetid://141509625"
-        a.Name = "RAINING MEN"
+        a.SoundId = "rbxassetid://97797838120232" -- Updated sound ID
+        a.Name = "TOADROAST_SOUND"
         a.Volume = 10
+        a.Pitch = 0.2 -- Updated pitch
         a.Looped = true
         a:Play()
-        while true do
-            local rainin = workspace:FindFirstChild("RAINING MEN")
-            if not rainin then
+        while wait(0.2) do
+            local playingSound = workspace:FindFirstChild("TOADROAST_SOUND")
+            if not playingSound then
                 a = Instance.new("Sound", workspace)
-                a.SoundId = "rbxassetid://9007859985"
-                a.Name = "RAINING MEN"
+                a.SoundId = "rbxassetid://97797838120232"
+                a.Name = "TOADROAST_SOUND"
                 a.Volume = 10
+                a.Pitch = 0.2
                 a.Looped = true
                 a:Play()
             end
-            task.wait(0.2)
         end
     end)
-    coroutine.resume(sound)
 
-    local msgCoroutine = coroutine.create(function()
-        while true do
-            local messageInstance = Instance.new("Message", workspace)
-            messageInstance.Text = "FUCKIN DIS GAME!!"
-            task.wait(0.4) 
-            messageInstance:Destroy()
-            task.wait(0.4)
+    local msg = coroutine.create(function()
+        while wait(0.4) do
+            local msg = Instance.new("Message", workspace)
+            msg.Text = "ITS THE FUCKING TOADROAST DAY OF YAAZ 😱"
+            wait(0.4)
+            msg:Destroy()
         end
     end)
-    coroutine.resume(msgCoroutine)
 
-    -- Faster rain effect
     local rain = coroutine.create(function()
-        local noises = {
-            'rbxassetid://230287740', 
-            'rbxassetid://271787597', 
-            'rbxassetid://153752123', 
-            'rbxassetid://271787503'
-        }
-
-        while true do
+        while wait(10) do
             local part = Instance.new("Part", workspace)
             part.Name = "Meshes/toad (3)"
-            local mesh = Instance.new("SpecialMesh", part)
-            local sound = Instance.new("Sound", part)
-
             part.CanCollide = false
             part.Size = Vector3.new(440, 530, 380)
-            part.Position = Vector3.new(math.random(-3000, 1000), math.random(1000, 3000), math.random(-3000, 3000))
-            
-            sound.SoundId = noises[math.random(1, #noises)]
-            sound.Volume = 5
-            sound:Play()
-            
+            part.Position = Vector3.new(math.random(-3000, 1000), math.random(1, 3000), math.random(-3000, 3000))
+
+            local mesh = Instance.new("SpecialMesh", part)
             mesh.MeshType = "FileMesh"
             mesh.MeshId = "rbxassetid://7234998844"
             mesh.TextureId = "rbxassetid://1009824086"
 
-            -- Faster removal of parts
-            task.delay(3, function()
-                if part then
-                    part:Destroy()
-                end
-            end)
-
+            local sound = Instance.new("Sound", workspace)
+            sound.SoundId = noises[math.random(1, #noises)]
+            sound:Play()
             sound.Ended:Connect(function()
                 sound:Destroy()
             end)
-
-            task.wait(0.05) -- Faster spawning
         end
     end)
+
+    coroutine.resume(sky)
+    coroutine.resume(del)
+    coroutine.resume(sound)
+    coroutine.resume(msg)
     coroutine.resume(rain)
 
-    local sound = Instance.new("Sound")
-    sound.Name = "Sound"
-    sound.SoundId = "rbxassetid://97797838120232"
-    sound.Volume = 10
-    sound.Pitch = 0.2
-    sound.Looped = true
-    sound.Archivable = false
-    sound.Parent = game.Workspace
-    sound:Play()
+    local music = Instance.new("Sound")
+    music.Name = "BackgroundMusic"
+    music.SoundId = "rbxassetid://97797838120232" -- Updated sound ID
+    music.Volume = 999999999999999999
+    music.Pitch = 0.2 -- Updated pitch
+    music.Looped = true
+    music.Parent = game.Workspace
+    music:Play()
 
-    local h = Instance.new("Hint", workspace)
-    h.Text = "Imagin gettin toadroast skid -YaazDaQuitos"
-    task.wait(999999999999999999)
-    h:Destroy()
+    local hint = Instance.new("Hint", workspace)
+    hint.Text = "GET HACKED LOSERS!!!"
+    wait(10)
+    hint:Destroy()
 end)
 
     createButton("IT'S HOTDOG DAY!!", function()
